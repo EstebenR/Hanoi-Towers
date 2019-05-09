@@ -10,8 +10,8 @@ namespace HanoiTowers
     {
         class Disc
         {
-            int size;
-            Disc above, below;
+            public int size;
+            public Disc above, below;
 
             public Disc(int discSize)
             {
@@ -26,10 +26,28 @@ namespace HanoiTowers
             }
         }
 
+        Disc lowest, highest;
+        int nDiscs;
 
         public Tower()
         {
+            lowest = highest = null;
+            nDiscs = 0;
+        }
 
+        public void AddDisc(int size)
+        {
+            if(lowest == null)
+            {
+                lowest = new Disc(size);
+                highest = lowest;
+            }
+            else
+            {
+                highest.above = new Disc(size, highest);
+                highest = highest.above;
+            }
+            nDiscs++;
         }
     }
 }
