@@ -22,7 +22,7 @@ namespace HanoiTowers
             public Disc(int discSize, Disc discBelow)
             {
                 size = discSize;
-                above = discBelow;
+                below = discBelow;
             }
         }
 

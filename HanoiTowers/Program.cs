@@ -17,6 +17,7 @@ namespace HanoiTowers
 
             PopulateTower(tower1, HEIGHT-1);
             PrintTowers(tower1, tower2, tower3);
+
         }
 
         //Moves highest disc from 'fromTower' to 'toTower'
@@ -43,6 +44,7 @@ namespace HanoiTowers
 
         static void PrintTowers(Tower tower1, Tower tower2, Tower tower3)
         {
+            Console.Clear();
             int[] towerSizes = new int[]{ tower1.NumDiscs(), tower2.NumDiscs(), tower3.NumDiscs() };
             for(int i = HEIGHT+1; i > 0; i--)
             {
