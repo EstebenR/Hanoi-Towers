@@ -72,7 +72,15 @@ namespace HanoiTowers
         //Returns size of the highest disc in tower
         public int GetSizeHighest()
         {
-            return highest.size;
+            if (highest != null)
+                return highest.size;
+            else
+                return 1000;
+        }
+
+        public int GetSizeLower()
+        {
+            return lowest.size;
         }
 
         public bool CheckMove(int size)

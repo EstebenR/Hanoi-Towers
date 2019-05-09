@@ -8,7 +8,7 @@ namespace HanoiTowers
 {
     class Program
     {
-        static int HEIGHT = 4;
+        static int HEIGHT = 5;
         static Tower tower1, tower2, tower3;
         static void Main(string[] args)
         {
@@ -18,8 +18,14 @@ namespace HanoiTowers
 
             PopulateTower(tower1, HEIGHT-1);
             PrintTowers();
-            SolveTower(tower1, tower2, tower3);
-            
+
+            for(int i = 0; i < HEIGHT-1; i++)
+            {
+                if(i%2==0)
+                SolveTower(tower1, tower2, tower3);
+                else
+                SolveTower(tower3, tower2, tower1);
+            }
         }
 
         //Moves highest disc from 'fromTower' to 'toTower', true if able
@@ -46,8 +52,9 @@ namespace HanoiTowers
 
         static void SolveTower(Tower fromTower, Tower toTower, Tower auxiliar)
         {
+            int objectiveNumber = fromTower.GetSizeLower();
             System.Threading.Thread.Sleep(500);
-            if (/*fromTower.NumDiscs() > 0*/toTower.NumDiscs()!=HEIGHT-1)
+            if (fromTower.NumDiscs() > 0/*toTower.NumDiscs()!=HEIGHT-1*/)
             {
                 //Numero de elementos impar hay que mover highest a toTower, par a auxiliar
                 //even
@@ -56,6 +63,8 @@ namespace HanoiTowers
                     //If movement can't be done, free up aux tower
                     if(!MoveDisc(fromTower, auxiliar))
                     {
+                        SolveTower(auxiliar, toTower, fromTower);
+                        MoveDisc(fromTower, auxiliar);
                     }
                 }
                 else //odd
@@ -69,10 +78,10 @@ namespace HanoiTowers
                     }
                 }
                 //If it's 0, fromTower is empty now, the lowest is in toTower and the rest are in aux
-                if (fromTower.NumDiscs() > 0)
+                if (fromTower.NumDiscs() > 0 /*&& toTower.GetSizeHighest() > objectiveNumber*/)
                     SolveTower(fromTower, toTower, auxiliar);
-                else if (fromTower.NumDiscs() == 0)
-                    SolveTower(auxiliar, toTower, fromTower);
+                /*else if (fromTower.NumDiscs() == 0)
+                    SolveTower(auxiliar, toTower, fromTower);*/
             }
         }
 
