@@ -8,13 +8,15 @@ namespace HanoiTowers
 {
     class Program
     {
+        static int HEIGHT = 5;
         static void Main(string[] args)
         {
             Tower tower1 = new Tower();
             Tower tower2 = new Tower();
             Tower tower3 = new Tower();
 
-            PopulateTower(tower1, 4);
+            PopulateTower(tower1, HEIGHT-1);
+            PrintTowers(tower1, tower2, tower3);
         }
 
         //Moves highest disc from 'fromTower' to 'toTower'
@@ -39,9 +41,24 @@ namespace HanoiTowers
             //Numero de elementos impar hay que mover highest a toTower, par a auxiliar
         }
 
-        static void Print(Tower tower1, Tower tower2, Tower tower3)
+        static void PrintTowers(Tower tower1, Tower tower2, Tower tower3)
         {
-
+            int[] towerSizes = new int[]{ tower1.NumDiscs(), tower2.NumDiscs(), tower3.NumDiscs() };
+            for(int i = HEIGHT+1; i > 0; i--)
+            {
+                foreach (int towerHeight in towerSizes){
+                    if (towerHeight >= i)
+                    {
+                        Console.BackgroundColor = ConsoleColor.White;
+                        Console.Write("  ");
+                    }
+                    else
+                        Console.Write("||");
+                    Console.BackgroundColor = ConsoleColor.Black;
+                    Console.Write("   ");
+                }
+                Console.WriteLine();
+            }
         }
     }
 }
