@@ -33,5 +33,10 @@ namespace HanoiTowers
                 tower.AddDisc(i);
             }
         }
+
+        static void SolveTower(Tower fromTower, Tower toTower, Tower auxiliar)
+        {
+
+        }
     }
 }

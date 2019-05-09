@@ -53,6 +53,7 @@ namespace HanoiTowers
                 return true;
             }
             return false;
+
         }
 
         //Removes the highest disc of the tower
@@ -69,6 +70,14 @@ namespace HanoiTowers
         public int GetSizeHighest()
         {
             return highest.size;
+        }
+
+        public bool CheckMove(int size)
+        {
+            if (highest == null || size < highest.size)
+                return true;
+            else
+                return false;
         }
     }
 }
