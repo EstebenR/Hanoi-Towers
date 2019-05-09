@@ -35,6 +35,9 @@ namespace HanoiTowers
             nDiscs = 0;
         }
 
+        //Returns number of discs in tower
+        public int NumDiscs() { return nDiscs; }
+
         //Adds disc of 'size' on top of the tower, true if it could be added
         public bool AddDisc(int size)
         {

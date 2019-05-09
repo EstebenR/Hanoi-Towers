@@ -14,7 +14,7 @@ namespace HanoiTowers
             Tower tower2 = new Tower();
             Tower tower3 = new Tower();
 
-            PopulateTower(tower1, 3);
+            PopulateTower(tower1, 4);
         }
 
         //Moves highest disc from 'fromTower' to 'toTower'
@@ -35,6 +35,11 @@ namespace HanoiTowers
         }
 
         static void SolveTower(Tower fromTower, Tower toTower, Tower auxiliar)
+        {
+            //Numero de elementos impar hay que mover highest a toTower, par a auxiliar
+        }
+
+        static void Print(Tower tower1, Tower tower2, Tower tower3)
         {
 
         }
