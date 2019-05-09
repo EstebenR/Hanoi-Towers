@@ -20,7 +20,9 @@ namespace HanoiTowers
         //Moves highest disc from 'fromTower' to 'toTower'
         static void MoveDisc(Tower fromTower, Tower toTower)
         {
-
+            int aux = fromTower.GetSizeHighest();
+            if (toTower.AddDisc(aux))
+                fromTower.RemoveHighest();
         }
 
         //Fills tower from lowest to highest starting from maxSize

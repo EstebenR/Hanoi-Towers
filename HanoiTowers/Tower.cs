@@ -35,29 +35,37 @@ namespace HanoiTowers
             nDiscs = 0;
         }
 
-        public void AddDisc(int size)
+        //Adds disc of 'size' on top of the tower, true if it could be added
+        public bool AddDisc(int size)
         {
             if(lowest == null)
             {
                 lowest = new Disc(size);
                 highest = lowest;
+                nDiscs++;
+                return true;
             }
-            else
+            else if(size < highest.size)
             {
                 highest.above = new Disc(size, highest);
                 highest = highest.above;
+                nDiscs++;
+                return true;
             }
-            nDiscs++;
+            return false;
         }
 
+        //Removes the highest disc of the tower
         public void RemoveHighest()
         {
             if(highest != null)
             {
                 highest = highest.below;
+                nDiscs--;
             }
         }
 
+        //Returns size of the highest disc in tower
         public int GetSizeHighest()
         {
             return highest.size;
