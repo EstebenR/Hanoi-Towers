@@ -57,5 +57,10 @@ namespace HanoiTowers
                 highest = highest.below;
             }
         }
+
+        public int GetSizeHighest()
+        {
+            return highest.size;
+        }
     }
 }
