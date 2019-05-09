@@ -41,7 +41,7 @@ namespace HanoiTowers
         //Adds disc of 'size' on top of the tower, true if it could be added
         public bool AddDisc(int size)
         {
-            if(lowest == null)
+            if(highest == null)
             {
                 lowest = new Disc(size);
                 highest = lowest;
