@@ -49,5 +49,13 @@ namespace HanoiTowers
             }
             nDiscs++;
         }
+
+        public void RemoveHighest()
+        {
+            if(highest != null)
+            {
+                highest = highest.below;
+            }
+        }
     }
 }
