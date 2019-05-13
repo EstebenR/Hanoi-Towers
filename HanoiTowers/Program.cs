@@ -8,7 +8,7 @@ namespace HanoiTowers
 {
     class Program
     {
-        static int HEIGHT = 5;
+        static int HEIGHT = 6;
         static Tower tower1, tower2, tower3;
         static void Main(string[] args)
         {
@@ -19,13 +19,14 @@ namespace HanoiTowers
             PopulateTower(tower1, HEIGHT-1);
             PrintTowers();
 
-            for(int i = 0; i < HEIGHT-1; i++)
+			/*for(int i = 0; i < HEIGHT-1; i++)
             {
                 if(i%2==0)
                 SolveTower(tower1, tower2, tower3);
                 else
                 SolveTower(tower3, tower2, tower1);
-            }
+            }*/
+			SolveTower(HEIGHT - 1, tower1, tower3, tower2);
         }
 
         //Moves highest disc from 'fromTower' to 'toTower', true if able
@@ -105,5 +106,16 @@ namespace HanoiTowers
                 Console.WriteLine();
             }
         }
+
+		static void SolveTower(int nDiscs, Tower fromTower, Tower toTower, Tower aux)
+		{
+			if(nDiscs > 0)
+			{
+				SolveTower(nDiscs - 1, fromTower, aux, toTower);
+				MoveDisc(fromTower, toTower);
+				System.Threading.Thread.Sleep(500);
+				SolveTower(nDiscs - 1, aux, toTower, fromTower);
+			}
+		}
     }
 }
