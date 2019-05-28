@@ -51,41 +51,6 @@ namespace HanoiTowers
             }
         }
 
-        static void SolveTower(Tower fromTower, Tower toTower, Tower auxiliar)
-        {
-            int objectiveNumber = fromTower.GetSizeLower();
-            System.Threading.Thread.Sleep(500);
-            if (fromTower.NumDiscs() > 0/*toTower.NumDiscs()!=HEIGHT-1*/)
-            {
-                //Numero de elementos impar hay que mover highest a toTower, par a auxiliar
-                //even
-                if (fromTower.NumDiscs() % 2 == 0)
-                {
-                    //If movement can't be done, free up aux tower
-                    if(!MoveDisc(fromTower, auxiliar))
-                    {
-                        SolveTower(auxiliar, toTower, fromTower);
-                        MoveDisc(fromTower, auxiliar);
-                    }
-                }
-                else //odd
-                {
-                    //if movement can't be done, free up toTower
-                    if(!MoveDisc(fromTower, toTower))
-                    {
-                        SolveTower(toTower, auxiliar, fromTower);
-                        //After emptying the toTower, move from to to
-                        MoveDisc(fromTower, toTower);
-                    }
-                }
-                //If it's 0, fromTower is empty now, the lowest is in toTower and the rest are in aux
-                if (fromTower.NumDiscs() > 0 /*&& toTower.GetSizeHighest() > objectiveNumber*/)
-                    SolveTower(fromTower, toTower, auxiliar);
-                /*else if (fromTower.NumDiscs() == 0)
-                    SolveTower(auxiliar, toTower, fromTower);*/
-            }
-        }
-
         static void PrintTowers()
         {
             Console.Clear();
