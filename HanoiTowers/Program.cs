@@ -8,7 +8,7 @@ namespace HanoiTowers
 {
     class Program
     {
-        static int HEIGHT = 5;
+        static int HEIGHT = 6;
         static Tower tower1, tower2, tower3;
         static void Main(string[] args)
         {
@@ -19,13 +19,14 @@ namespace HanoiTowers
             PopulateTower(tower1, HEIGHT-1);
             PrintTowers();
 
-            for(int i = 0; i < HEIGHT-1; i++)
+			/*for(int i = 0; i < HEIGHT-1; i++)
             {
                 if(i%2==0)
                 SolveTower(tower1, tower2, tower3);
                 else
                 SolveTower(tower3, tower2, tower1);
-            }
+            }*/
+			SolveTower(HEIGHT - 1, tower1, tower3, tower2);
         }
 
         //Moves highest disc from 'fromTower' to 'toTower', true if able
@@ -50,41 +51,6 @@ namespace HanoiTowers
             }
         }
 
-        static void SolveTower(Tower fromTower, Tower toTower, Tower auxiliar)
-        {
-            int objectiveNumber = fromTower.GetSizeLower();
-            System.Threading.Thread.Sleep(500);
-            if (fromTower.NumDiscs() > 0/*toTower.NumDiscs()!=HEIGHT-1*/)
-            {
-                //Numero de elementos impar hay que mover highest a toTower, par a auxiliar
-                //even
-                if (fromTower.NumDiscs() % 2 == 0)
-                {
-                    //If movement can't be done, free up aux tower
-                    if(!MoveDisc(fromTower, auxiliar))
-                    {
-                        SolveTower(auxiliar, toTower, fromTower);
-                        MoveDisc(fromTower, auxiliar);
-                    }
-                }
-                else //odd
-                {
-                    //if movement can't be done, free up toTower
-                    if(!MoveDisc(fromTower, toTower))
-                    {
-                        SolveTower(toTower, auxiliar, fromTower);
-                        //After emptying the toTower, move from to to
-                        MoveDisc(fromTower, toTower);
-                    }
-                }
-                //If it's 0, fromTower is empty now, the lowest is in toTower and the rest are in aux
-                if (fromTower.NumDiscs() > 0 /*&& toTower.GetSizeHighest() > objectiveNumber*/)
-                    SolveTower(fromTower, toTower, auxiliar);
-                /*else if (fromTower.NumDiscs() == 0)
-                    SolveTower(auxiliar, toTower, fromTower);*/
-            }
-        }
-
         static void PrintTowers()
         {
             Console.Clear();
@@ -105,5 +71,16 @@ namespace HanoiTowers
                 Console.WriteLine();
             }
         }
+
+		static void SolveTower(int nDiscs, Tower fromTower, Tower toTower, Tower aux)
+		{
+			if(nDiscs > 0)
+			{
+				SolveTower(nDiscs - 1, fromTower, aux, toTower);
+				MoveDisc(fromTower, toTower);
+				System.Threading.Thread.Sleep(500);
+				SolveTower(nDiscs - 1, aux, toTower, fromTower);
+			}
+		}
     }
 }
