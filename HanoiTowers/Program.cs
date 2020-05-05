@@ -52,8 +52,9 @@ namespace HanoiTowers
 
         static void SolveTower(Tower fromTower, Tower toTower, Tower auxiliar)
         {
+            int objectiveNumber = fromTower.GetSizeLower();
             System.Threading.Thread.Sleep(500);
-            if (fromTower.NumDiscs() > 0/*toTower.NumDiscs()!=HEIGHT-1*/) //revisar esto 
+            if (fromTower.NumDiscs() > 0/*toTower.NumDiscs()!=HEIGHT-1*/)
             {
                 //Numero de elementos impar hay que mover highest a toTower, par a auxiliar
                 //even
